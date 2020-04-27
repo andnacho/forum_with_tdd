@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.highlight {
+    background-color: #c2d9e5;
+}
+
+.tribute-container {
+    background-color: rgba(236, 194, 159, 0.1);
+    border: 1px solid cornflowerblue;
+    padding: 5px;
+}
+
+.tribute-item {
+    list-style: none;
+}
