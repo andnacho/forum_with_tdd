@@ -6,11 +6,12 @@ use App\Events\ThreadHasNewReply;
 use App\Events\ThreadReceivedNewReply;
 use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Thread extends Model
 {
 
-    use RecordsActivity;
+    use RecordsActivity, Searchable;
 
     protected $guarded = [];
 
@@ -41,6 +42,30 @@ class Thread extends Model
         static::created(function ($thread) {
             $thread->update(['slug' => $thread->title]);
         });
+    }
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'threads_index';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array['path'] = $this->path();
+
+        return $array;
     }
 
     public function path()

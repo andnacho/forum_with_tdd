@@ -2,6 +2,7 @@
 
 @section('header')
     <link rel="stylesheet" href="/css/vendor/tribute.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @endsection
 
 @section('content')
@@ -9,34 +10,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="row my-3">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
 
-                                    <img src="/storage/{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-2">
-                                    <a href="{{ $thread->creator->path() }}">{{ $thread->creator->name }}</a> posted:
-                                    <span class="font-weight-bold">{{ $thread->title }}</span>
-                                    @can ('delete', $thread)
-                                    <form action="{{ $thread->path() }}" method="post" class="float-right">
-                                        @csrf
-                                        @method('delete')
-                                        <input type="submit" value="Delete" class="btn btn-danger">
-                                    </form>
-                                    @endcan
-                                    </h4>
-                                </div>
-                                <div class="card-body">
-
-                                    <article>
-
-                                        <div class="body">{{ $thread->body }}</div>
-                                    </article>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include ('threads._question')
 
                     <div class="row my-3">
                         <div class="col-md-12">

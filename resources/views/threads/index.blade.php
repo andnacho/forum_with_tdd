@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('header')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css" integrity="sha256-HB49n/BZjuqiCtQQf49OdZn63XuKFaxcIHWf0HNKte8=" crossorigin="anonymous">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -15,8 +20,9 @@
                 </div>
             </div>
 
-            @if (count($trending))
-                <div class="col-md-4">
+            <div class="col-md-4">
+                @if (count($trending))
+
                     <div class="card">
                         <div class="card-header">
                             Trending threads
@@ -31,8 +37,18 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
-            @endif
+
+                @endif
+                    <div class="card">
+                        <div class="card-header">
+                            Search
+                        </div>
+                        <div class="card-body">
+                            <test-algolia public-key="{{ config('scout.algolia.secret') }}" app-id="{{ config('scout.algolia.id') }}"></test-algolia>
+                        </div>
+                    </div>
+            </div>
+
 
         </div>
     </div>

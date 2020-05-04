@@ -22,21 +22,27 @@ Auth::routes(['verify' => true]);
 
 Route::redirect('/', '/home');
 
+Route::view('scan', 'scan');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('threads/create', 'ThreadController@create');
+Route::get('threads/search', 'SearchController@show');
 Route::get('threads/{channel}/{thread}', 'ThreadController@show');
+Route::delete('threads/{channel}/{thread}', 'ThreadController@destroy');
+Route::patch('threads/{channel}/{thread}', 'ThreadController@update');
+Route::post('threads', 'ThreadController@store')->middleware('verified:threads');
+
 
 Route::post('locked-threads/{thread}', 'LockedThreadsController@store')->name('locked-threads.store')->middleware('admin');
 Route::delete('locked-threads/{thread}', 'LockedThreadsController@destroy')->name('locked-threads.destroy')->middleware('admin');
-
-Route::delete('threads/{channel}/{thread}', 'ThreadController@destroy');
-Route::post('threads', 'ThreadController@store')->middleware('verified:threads');
 
 //Route::resource('threads', 'ThreadController');
 Route::get('/threads/{channel}/{thread}/replies', 'ReplyController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');
 Route::patch('replies/{reply}', 'ReplyController@update');
 Route::delete('replies/{reply}', 'ReplyController@destroy')->name('replies.destroy');
+
 Route::get('threads/{channel?}', 'ThreadController@index')->name('threads');
 //Route::get('threads', 'ThreadController@index' );
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@store')->middleware('auth');

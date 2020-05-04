@@ -42,8 +42,7 @@ class ReplyPolicy
     public function create(User $user)
     {
         $lastReply = $user->fresh()->lastReply;
-
-        if (!$lastReply) {
+        if (!$lastReply || $lastReply->updated_at < now()->subMinute(1)) {
             return true;
         }
 

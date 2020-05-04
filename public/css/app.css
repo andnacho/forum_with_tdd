@@ -10898,3 +10898,7 @@ a.text-dark:focus {
   list-style: none;
 }
 
+*:focus {
+  outline: none;
+}
+

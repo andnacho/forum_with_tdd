@@ -24,7 +24,7 @@
             </a>
         </div>
         <div>
-            <div class="card-body">{{ $thread->body }}</div>
+            <div class="card-body">{!! $thread->body !!}</div>
         </div>
 
         <div class="card-footer">

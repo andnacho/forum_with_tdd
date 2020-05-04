@@ -18,7 +18,7 @@
                 <div v-if="editing">
                     <form v-on:submit.prevent="update">
                         <div class="form-group">
-                            <textarea class="form-control" v-model="body" required></textarea>
+                            <text-editor v-model="body"></text-editor>
                         </div>
                         <button class="btn btn-xs btn-primary">Update</button>
                         <button class="btn btn-xs btn-link" @click="editing = false" type="button">Cancel</button>

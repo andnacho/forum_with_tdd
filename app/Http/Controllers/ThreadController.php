@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Favoritable;
 use App\Inspection\Spam;
+use App\Rules\Recaptcha;
 use App\Rules\SpamFree;
 use App\Thread;
 use App\Filters\ThreadFilters;
@@ -64,14 +65,14 @@ class ThreadController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request, Recaptcha $recaptcha)
     {
-        $this->validate($request, [
+        $request->validate([
             'title' => ['required', new SpamFree],
             'body' => ['required', new SpamFree],
-            'channel_id' => 'required|exists:channels,id'
+            'channel_id' => 'required|exists:channels,id',
+            'g-recaptcha-response' => [$recaptcha]
         ]);
-
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
@@ -106,15 +107,14 @@ class ThreadController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Thread $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Thread $thread)
+    public function update($channel, Thread $thread)
     {
-        //
+        $this->authorize('update', $thread);
+
+        $thread->update(request()->validate([
+            'title' => ['required', new SpamFree],
+            'body' => ['required', new SpamFree],
+        ]));
     }
 
     /**
@@ -133,7 +133,7 @@ class ThreadController extends Controller
             return response([], 204);
         }
 
-        return redirect('/profiles/andres');
+        return redirect('/profiles/' . auth()->user()->name);
     }
 
     /**

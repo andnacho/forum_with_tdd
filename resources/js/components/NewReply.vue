@@ -4,12 +4,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <vue-tribute :options="tributeOptions">
-                        <textarea class="form-control"
-                                  name="body"
-                                  id=""
-                                  rows="5"
-                                  placeholder="Something to say"
-                                  v-model="body"></textarea>
+                        <text-editor name="body" v-model="body" placeholder="Have something to say?" :shouldClear="completed" ref="trix"></text-editor>
                     </vue-tribute>
                 </div>
 
@@ -35,7 +30,8 @@
         data() {
             return {
                 body: '',
-                tributeOptions: {}
+                tributeOptions: {},
+                completed: false,
             }
         },
         components: {
@@ -56,6 +52,8 @@
                     .then(({data}) => {
                         this.body = '';
                         flash('Your reply has been posted.', 'success', 'Success!');
+
+                        this.completed = true;
 
                         this.$emit('created', data);
                     });

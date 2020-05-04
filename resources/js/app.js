@@ -4,9 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+import InstantSearch from 'vue-instantsearch';
+
+Vue.use(InstantSearch);
 
 let authorizations = require('./authorization');
 
@@ -44,6 +49,9 @@ Vue.component('user-notifications', require('./components/UserNotifications.vue'
 Vue.component('avatar-form', require('./components/avatar-form.vue').default);
 
 Vue.component('thread-view', require('./pages/Thread.vue').default);
+Vue.component('test-algolia', require('./components/Search.vue').default);
+Vue.component('text-editor', require('./components/TextEditor.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -52,5 +60,5 @@ Vue.component('thread-view', require('./pages/Thread.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });
