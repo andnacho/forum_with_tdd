@@ -1,0 +1,56 @@
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T020643.419.html
+
+###
+
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T020518.419.html
+
+###
+
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T015848.419.html
+
+###
+
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T015838.419.html
+
+###
+
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T015836.419.html
+
+###
+
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T015831.419.html
+
+###
+
+POST http://forum.test/replies/1/favorites
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-14T015800.419.html
+
+###
+
